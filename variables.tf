@@ -1,6 +1,9 @@
 variable "vpc_cidr" {
   type        = string
-  tags={
-    Name = "vpc-${var.env}"
-  }
+  description = "CIDR block for VPC"
+}
+
+variable "env" {
+  type        = string
+  description = "Environment name"
 }
