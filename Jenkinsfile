@@ -5,7 +5,7 @@ pipeline {
     parameters {
         choice(
             name: 'ENV',
-            choices: ['dev', 'stg','prod'],
+            choices: ['dev', 'stg', 'prod'],
             description: 'Choose the Terraform environment'
         )
     }
@@ -100,12 +100,6 @@ ${BUILD_URL}
 
         failure {
             script {
-
-                def reason = "Unknown failure"
-
-                if (fileExists('terraform-plan.log')) {
-                    reason = readFile('terraform-plan.log')
-                }
 
                 emailext(
                     subject: "FAILED: Terraform ${ENV} - Build #${BUILD_NUMBER}",
