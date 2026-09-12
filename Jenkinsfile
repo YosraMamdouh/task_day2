@@ -101,6 +101,12 @@ ${BUILD_URL}
         failure {
             script {
 
+                def reason = "Unknown failure"
+
+                if (fileExists('terraform-plan.log')) {
+                    reason = readFile('terraform-plan.log')
+                }
+
                 emailext(
                     subject: "FAILED: Terraform ${ENV} - Build #${BUILD_NUMBER}",
                     body: """
